@@ -35,8 +35,8 @@ testAbstractTree :: Tree
 testAbstractTree =
   Tree
     (M.fromList
-       [ ("Tomas", Tree (M.fromList [("0860687523", Empty)]))
-       , ("Dylan", Tree (M.fromList [("0872391823", Empty)]))
+       [ ("Tomas", Tree (M.fromList [("01239349", Empty)]))
+       , ("Dylan", Tree (M.fromList [("0871232131", Empty)]))
        ])
 
 treeify :: [([Char], Tree)] -> Tree
@@ -47,13 +47,13 @@ testConcreteTree =
   treeify
     [ ( "Tomas"
       , treeify
-          [ ("Phone", treeify [("086068723", Empty)])
-          , ("DOB", treeify [("13/03/1998", Empty)])
+          [ ("Phone", treeify [("087123456", Empty)])
+          , ("DOB", treeify [("13/09/1898", Empty)])
           ])
     , ( "Sinead"
       , treeify
-          [ ("Phone", treeify [("0860783678", Empty)])
-          , ("DOB", treeify [("14/04/1998", Empty)])
+          [ ("Phone", treeify [("102302130", Empty)])
+          , ("DOB", treeify [("14/07/1898", Empty)])
           ])
     ]
 
