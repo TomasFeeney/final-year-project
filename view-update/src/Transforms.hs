@@ -1,15 +1,5 @@
 module Transforms
-  ( getChild
-  , getNumber
-  , getDob
-  , someFunc
-  , mapTree
-  , zipThree
-  , testAbstractTree
-  , testConcreteTree
-  , liftTree
-  , putBackTree
-  , getNumberAbstract
+  (
   ) where
 
 import qualified Data.Map as M
@@ -94,7 +84,7 @@ putBackTree modifiedAbstractTree oldConcreteTree =
                       [ ("Phone", treeify [(number, Empty)])
                       , ("DOB", treeify [(dob, Empty)])
                       ])
-                | (name, number, dob) <- zipThree names numbers dobs
+                | (name, number, dob) <- zip3 names numbers dobs
                 ]
 
 getField :: Tree -> [Char] -> [Char] -> Maybe [Char]
@@ -128,9 +118,3 @@ first pred (a:as) =
   if (pred a)
     then (Just a)
     else (first pred as)
-
-zipThree :: [a] -> [b] -> [c] -> [(a, b, c)]
-zipThree [] _ _ = []
-zipThree _ [] _ = []
-zipThree _ _ [] = []
-zipThree (a:as) (b:bs) (c:cs) = (a, b, c) : zipThree as bs cs
