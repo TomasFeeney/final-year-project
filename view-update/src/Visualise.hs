@@ -10,7 +10,6 @@ import Data.Graph.Inductive
 import qualified Data.GraphViz as G
 import qualified Data.GraphViz.Attributes.Complete as G
 import qualified Data.GraphViz.Types as G
-import Data.Reify (MuRef(..), reifyGraph)
 import qualified Data.Text.Lazy as L
 
 testGraph :: Gr String String

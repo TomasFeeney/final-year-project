@@ -8,8 +8,8 @@ import System.IO
 import Visualise
 
 main :: IO ()
-main = mapM_ (writeGraphAsGif) (zip (walkGraph booleanGraph 1 []) [1 ..])
-
+-- main = mapM_ (writeGraphAsGif) (zip (walkGraph booleanGraph 1 []) [1 ..])
+main = putStrLn "hey"{-
 writeGraph :: (L.Text, Int) -> IO ()
 writeGraph (g, n) = do
   writeFile pathName (L.unpack g)
@@ -21,3 +21,4 @@ writeGraph (g, n) = do
 writeGraphAsGif (g, n) = G.runGraphviz (visualiseGraph n g) (G.Gif) pathName
   where
     pathName = "../out/out" ++ (show n) ++ ".gif"
+-}
