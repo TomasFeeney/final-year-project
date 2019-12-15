@@ -37,8 +37,7 @@ instance MuRef Boolean' where
   mapDeRef f (Lit b) = pure $ GraphLit b
   mapDeRef f (Var s) = pure $ GraphVar s
 
-booleanGraph =
-  toInductive (unsafePerformIO $ reifyGraph (And (Lit True) (Lit False)))
+booleanGraph = toInductive (unsafePerformIO $ reifyGraph booleanExpr)
 
 getNodes :: Graph BooleanNode -> [G.LNode L.Text]
 getNodes (Graph xs _) = [(x, label y) | (x, y) <- xs]
@@ -72,7 +71,7 @@ eval (And b1 b2) = (eval b1) && (eval b2)
 eval (Or b1 b2) = (eval b1) || (eval b2)
 
 booleanExpr :: Boolean'
-booleanExpr = (Or (And (Var "x") (Var "x")) (And (Var "x") (Var "x")))
+booleanExpr = (Or (And (Lit True) (Lit False)) (And (Lit True) (Lit True)))
 
 -- Given an output produce an input for the given expr to produce that output
 --

@@ -28,6 +28,8 @@ dependencies:
 - array
 - fgl
 - text
+- process-extras
+- bytestring
 
 library:
   source-dirs: src

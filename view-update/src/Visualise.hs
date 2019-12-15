@@ -3,6 +3,8 @@ module Visualise
   , visualiseGraph
   , printGraph
   , walkGraph
+  , writeGraphAsGif
+  , writeTraversalAsGif
   ) where
 
 import Data.Array
@@ -11,6 +13,7 @@ import qualified Data.GraphViz as G
 import qualified Data.GraphViz.Attributes.Complete as G
 import qualified Data.GraphViz.Types as G
 import qualified Data.Text.Lazy as L
+import System.IO
 
 testGraph :: Gr String String
 testGraph = mkGraph (zip [1 .. 3] ["a", "b", "c"]) [(1, 2, "label")]
@@ -38,3 +41,22 @@ walkGraph g n seen = [printGraph g n] ++ ns
       (map
          (\x -> walkGraph g x (seen ++ [n] ++ [x]))
          (filter (not . (`elem` seen)) (neighbors g n)))
+
+writeGraphAsGif :: Gr L.Text L.Text -> Int -> IO FilePath
+writeGraphAsGif g n = do
+  G.runGraphviz (visualiseGraph n g) (G.Gif) pathName
+  where
+    pathName = "out/out" ++ (show n) ++ ".gif"
+
+writeTraversalAsGif :: Gr L.Text L.Text -> [IO FilePath]
+writeTraversalAsGif g = walkAndWrite g 1 []
+  where
+    walkAndWrite :: Gr L.Text L.Text -> Int -> [Int] -> [IO FilePath]
+    walkAndWrite g n seen = [writeGraphAsGif g n] ++ ns
+      where
+        ns :: [IO FilePath]
+        ns =
+          concat $
+          (map
+             (\x -> walkAndWrite g x (seen ++ [n] ++ [x]))
+             (filter (not . (`elem` seen)) (neighbors g n)))
