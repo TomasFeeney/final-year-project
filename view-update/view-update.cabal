@@ -4,12 +4,13 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: a5b91bfba6d7e1d593d7291842c08afa0d56df21826c4d616cdd8479dc124e9a
+-- hash: 3bbb2ec1ce13a6115259f8ad1c3579fcb0fff86c02c2ca4b2920ec5abd86eef8
 
 name:           view-update
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/githubuser/view-update#readme>
-homepage:       https://github.com/githubuser/view-update#readme bug-reports:    https://github.com/githubuser/view-update/issues
+homepage:       https://github.com/githubuser/view-update#readme
+bug-reports:    https://github.com/githubuser/view-update/issues
 author:         Author name here
 maintainer:     example@example.com
 copyright:      2019 Author name here
@@ -35,17 +36,16 @@ library
   hs-source-dirs:
       src
   build-depends:
-      array
+      HUnit
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
     , data-reify
     , fgl
-    , gloss
     , graphviz
     , process-extras
     , text
-    , HUnit
   default-language: Haskell2010
 
 executable view-update-exe
@@ -56,13 +56,13 @@ executable view-update-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      array
+      HUnit
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
     , data-reify
     , fgl
-    , gloss
     , graphviz
     , process-extras
     , text
@@ -73,21 +73,21 @@ test-suite view-update-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      TestVisualise
       Paths_view_update
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      array
+      HUnit
+    , array
     , base >=4.7 && <5
     , bytestring
     , containers
     , data-reify
     , fgl
-    , gloss
     , graphviz
     , process-extras
     , text
     , view-update
-    , HUnit
   default-language: Haskell2010
