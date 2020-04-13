@@ -1,3 +1,4 @@
+dist: xenial
 language: generic
 
 # Caching so the next build will be fast too.
