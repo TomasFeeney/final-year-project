@@ -1,7 +1,10 @@
 {-# LANGUAGE FlexibleInstances #-}
 
 module View
-  (
+  ( Node
+  , label
+  , assign
+  , labelMultiple
   ) where
 
 import Control.Applicative
@@ -11,7 +14,7 @@ type Identifier = Integer
 
 data Node a =
   Node (a, Set.Set Identifier)
-  deriving (Show)
+  deriving (Show, Eq)
 
 {-data Tape a t = Literal a [Identifier]
             | Var String a [Identifier]
@@ -52,18 +55,13 @@ emptyNode a = Node (a, Set.empty)
 label :: Identifier -> a -> (Node a)
 label id a = Node (a, Set.fromList [id])
 
+labelMultiple :: [Identifier] -> a -> (Node a)
+labelMultiple ids a = Node (a, Set.fromList ids)
+
 assign :: [a] -> [Node a]
 assign as = map (\(x, y) -> label y x) (zip as [1 ..])
 
-example :: Fractional a => (a, a, a) -> (Node a, Node a)
-example (ogx, ogy, ogz) = ((x * y) / x, z + z)
+example :: Fractional a => [a] -> [Node a]
+example _xs = [(x * y) / x, z + z]
   where
-    x = label 1 ogx
-    y = label 2 ogy
-    z = label 3 ogz
--- strategy : use operator overloading on Node type to turn 
--- code into syntax tree / generic deep embedding (see Numeric.RAD)
--- Then "reify" syntax tree and visualise 
---
--- First will start with numerics as thanks to their typeclasses it makes
--- it easy to do operator overloading.
+    (x:y:z:_) = assign (_xs)
