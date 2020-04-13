@@ -1,2 +1,8 @@
+import Control.Monad
+import Test.HUnit
+import TestVisualise
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = do
+  counts <- runTestTT visualiseTests
+  putStrLn "Tests completed"

@@ -15,8 +15,9 @@ import qualified Data.GraphViz.Types as G
 import qualified Data.Text.Lazy as L
 import System.IO
 
-testGraph :: Gr String String
-testGraph = mkGraph (zip [1 .. 3] ["a", "b", "c"]) [(1, 2, "label")]
+testGraph :: Gr L.Text L.Text
+testGraph =
+  mkGraph (zip [1 .. 3] (map L.pack ["a", "b", "c"])) [(1, 2, L.pack "label")]
 
 visualiseGraph :: Int -> Gr L.Text L.Text -> G.DotGraph Node
 visualiseGraph n =
